@@ -66,13 +66,23 @@ In this project, OCSF is used to:
 
 src/
 ├── client/         # JavaFX GUI logic for the client application
+
 ├── server/         # Server-side application logic and OCSF server
+
 ├── controllers/    # Controllers for business logic (e.g., login, reservation, reports)
+
 ├── entities/       # Shared data models passed between client and server (e.g., Message, Subscriber)
+
 ├── services/       # Background services such as auto-cancellation
+
 ├── gui/            # FXML UI layout files for the client
+
 ├── serverGUI/      # JavaFX GUI for server setup (e.g., port selection screen)
+
 ├── ocsf.client/    # OCSF client networking classes
+
 ├── ocsf.server/    # OCSF server networking classes
+
 ├── common/         # Utility classes shared across components (if any)
+
 ├── resources/      # Static resources like CSS, images, and FXML (often merged with gui)
