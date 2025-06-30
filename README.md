@@ -65,6 +65,7 @@ In this project, OCSF is used to:
 ## 🧱 Project Structure
 
 src/
+
 ├── client/         # JavaFX GUI logic for the client application
 
 ├── server/         # Server-side application logic and OCSF server
