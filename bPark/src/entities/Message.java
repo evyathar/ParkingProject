@@ -220,6 +220,20 @@ public class Message implements Serializable {
 		REQUEST_SUBSCRIBER_DATA,
 
 		SUBSCRIBER_DATA_RESPONSE,
+		
+		/**
+		 * Sent by the client to request the latest dashboard statistics.
+		 * Expected to be handled by the server, which queries the database
+		 * and returns a summarized view of parking data.
+		 */
+		DASHBOARD_DATA_REQUEST,
+
+		/**
+		 * Sent by the server in response to DASHBOARD_DATA_REQUEST.
+		 * Contains a DashboardData object with aggregated statistics
+		 * such as total spots, occupied, available, reservations, etc.
+		 */
+		DASHBOARD_DATA_RESPONSE,
 
 	}
 

@@ -178,6 +178,7 @@ public class BParkClientApp extends Application {
     public static BParkClient getClient() {
         return client;
     } 
+    
     public static String getCurrentUser() {
         return currentUser;
     }

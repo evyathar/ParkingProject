@@ -1,13 +1,16 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import client.BParkClientApp;
+import entities.DashboardData;
 import entities.Message;
 import entities.Message.MessageType;
 import entities.ParkingOrder;
@@ -20,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -31,11 +35,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class ManagerController implements Initializable {
 
-	
 	// Dashboard Labels
 	@FXML
 	private Label lblTotalSpots;
@@ -92,6 +97,11 @@ public class ManagerController implements Initializable {
 	@FXML
 	private AreaChart<String, Number> subscriberActivityChart;
 
+	// HBox container for the custom legend displayed below the PieChart, holding
+	// color indicators and labels
+	@FXML
+	private HBox legendBox;
+
 	// Report Controls
 	@FXML
 	private ComboBox<String> comboReportType;
@@ -146,6 +156,9 @@ public class ManagerController implements Initializable {
 		loadInitialData();
 		startAutoRefresh();
 		loadSubscribers();
+
+		Message msg = new Message(Message.MessageType.DASHBOARD_DATA_REQUEST, null);
+		BParkClientApp.sendMessage(msg);
 
 	}
 
@@ -238,14 +251,38 @@ public class ManagerController implements Initializable {
 		updateLastRefreshTime();
 	}
 
+//	private void startAutoRefresh() {
+//		// Refresh dashboard every 30 seconds
+//		refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> {
+//			checkParkingStatus();
+//			updateLastRefreshTime();
+//		}));
+//		refreshTimeline.setCycleCount(Timeline.INDEFINITE);
+//		refreshTimeline.play();
+//	}
+	
+	
+	/**
+	 * Starts an automatic refresh mechanism using JavaFX Timeline.
+	 * Every 30 seconds, it:
+	 *  - Requests parking availability status.
+	 *  - Requests the latest dashboard data from the server.
+	 *  - Updates the UI with the current timestamp of the last refresh.
+	 */
 	private void startAutoRefresh() {
-		// Refresh dashboard every 30 seconds
-		refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> {
-			checkParkingStatus();
-			updateLastRefreshTime();
-		}));
-		refreshTimeline.setCycleCount(Timeline.INDEFINITE);
-		refreshTimeline.play();
+	    refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> {
+	        // Request updated parking availability from the server
+	        checkParkingStatus();
+
+	        // Request updated dashboard data from the server
+	        Message msg = new Message(MessageType.DASHBOARD_DATA_REQUEST, null);
+	        BParkClientApp.sendMessage(msg);
+
+	        // Update the last refresh timestamp label in the UI
+	        updateLastRefreshTime();
+	    }));
+	    refreshTimeline.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
+	    refreshTimeline.play(); // Start the timeline
 	}
 
 	// ===== Action Handlers =====
@@ -292,8 +329,8 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private void checkParkingStatus() {
-		Message msg = new Message(MessageType.CHECK_PARKING_AVAILABILITY, null);
-		BParkClientApp.sendMessage(msg);
+//		Message msg = new Message(MessageType.CHECK_PARKING_AVAILABILITY, null);
+//		BParkClientApp.sendMessage(msg); delete the request to a popup alert
 
 		// Also get active parkings for statistics
 		Message activeMsg = new Message(MessageType.GET_ACTIVE_PARKINGS, null);
@@ -573,6 +610,57 @@ public class ManagerController implements Initializable {
 		Platform.runLater(() -> {
 			ObservableList<ParkingSubscriber> list = FXCollections.observableArrayList(subscribers);
 			tableSubscribers.setItems(list);
+		});
+	}
+
+	/**
+	 * Updates the dashboard UI elements with the latest data.
+	 *
+	 * @param data DashboardData object containing updated metrics: - total spots -
+	 *             occupied spots - available spots - active reservations -
+	 *             reservation types counts for the pie chart
+	 */
+	public void updateDashboard(DashboardData data) {
+		// Update the labels with numeric data from DashboardData
+		lblTotalSpots.setText(String.valueOf(data.getTotalSpots()));
+		lblOccupied.setText(String.valueOf(data.getOccupied()));
+		lblAvailable.setText(String.valueOf(data.getAvailable()));
+		lblReservations.setText(String.valueOf(data.getActiveReservations()));
+
+		// Prepare PieChart data from reservation types and counts
+
+		ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+		data.getReservationTypes().forEach((type, count) -> pieData.add(new PieChart.Data(type, count)));
+
+		// Set the PieChart data and hide the default legend since a custom legend is
+		// used
+		parkingTypesChart.setData(pieData);
+		parkingTypesChart.setLegendVisible(false);
+		
+		
+		 // Update pie slice colors on the JavaFX Application Thread
+		Platform.runLater(() -> {
+			for (PieChart.Data d : pieData) {
+				String label = d.getName();
+				String color;
+				switch (label) {
+				case "Available":
+					color = "#27ae60";
+					break; // green
+				case "Reserved":
+					color = "#2980b9";
+					break; // blue
+				case "Immediate":
+					color = "#e74c3c";
+					break; // red
+				default:
+					color = "gray";
+					break;
+				}
+				 // Apply the color style to the pie slice node
+				d.getNode().setStyle("-fx-pie-color: " + color + ";");
+
+			}
 		});
 	}
 

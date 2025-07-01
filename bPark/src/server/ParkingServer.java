@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import controllers.ParkingController;
 import controllers.ReportController;
+import entities.DashboardData;
 import entities.Message;
 import entities.Message.MessageType;
 import entities.ParkingOrder;
@@ -307,6 +311,13 @@ public class ParkingServer extends AbstractServer {
 				client.sendToClient(response);
 				break;
 			}
+			// Handle client request for dashboard statistics
+			case DASHBOARD_DATA_REQUEST:
+				// Generate the dashboard data by querying the database
+				DashboardData data = buildDashboardData();
+				ret = new Message(MessageType.DASHBOARD_DATA_RESPONSE, data);
+				client.sendToClient(serialize(ret));
+				break;
 
 			default:
 				System.out.println("Unknown message type: " + message.getType());
@@ -568,4 +579,80 @@ public class ParkingServer extends AbstractServer {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Builds a {@link DashboardData} object containing key metrics for the
+	 * manager's dashboard.
+	 * 
+	 * <p>
+	 * The data includes:
+	 * </p>
+	 * <ul>
+	 * <li>Total number of parking spots</li>
+	 * <li>Number of occupied spots</li>
+	 * <li>Number of available spots (calculated)</li>
+	 * <li>Number of active reservations</li>
+	 * <li>A breakdown of spot statuses (Available, Reserved, Immediate)</li>
+	 * </ul>
+	 * 
+	 * <p>
+	 * The method retrieves the required data using SQL queries directly from the
+	 * database.
+	 * </p>
+	 * 
+	 * @return a {@code DashboardData} object populated with current system
+	 *         statistics.
+	 */
+	private DashboardData buildDashboardData() {
+		DashboardData data = new DashboardData();
+		try {
+			Connection conn = DBController.getInstance().getConnection();
+			Statement stmt = conn.createStatement();
+
+			// Total number of parking spots
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM parkingspot");
+			if (rs.next())
+				data.setTotalSpots(rs.getInt(1));
+
+			// Number of occupied parking spots
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM parkingspot WHERE isOccupied = 1");
+			if (rs.next())
+				data.setOccupied(rs.getInt(1));
+
+			// Calculate available spots
+			data.setAvailable(data.getTotalSpots() - data.getOccupied());
+
+			// Active reservations during the current time
+			rs = stmt.executeQuery(
+					"SELECT COUNT(*) FROM parkinginfo WHERE NOW() BETWEEN Estimated_start_time AND Estimated_end_time");
+			if (rs.next())
+				data.setActiveReservations(rs.getInt(1));
+
+			// Breakdown of spot statuses
+			rs = stmt.executeQuery("SELECT " + "CASE " + " WHEN ps.isOccupied = 0 THEN 'Available' "
+					+ " WHEN ps.isOccupied = 1 AND pi.IsOrderedEnum = 'yes' "
+					+ "      AND NOW() BETWEEN pi.Estimated_start_time AND pi.Estimated_end_time "
+					+ "      AND pi.statusEnum NOT IN ('cancelled', 'finished') THEN 'Reserved' "
+					+ " WHEN ps.isOccupied = 1 AND (pi.IsOrderedEnum = 'no' OR pi.IsOrderedEnum IS NULL) THEN 'Immediate' "
+					+ " ELSE 'Unknown' " + "END AS SpotStatus, " + "COUNT(*) AS CountSpots " + "FROM parkingspot ps "
+					+ "LEFT JOIN parkinginfo pi ON ps.ParkingSpot_ID = pi.ParkingSpot_ID "
+					+ "    AND NOW() BETWEEN pi.Estimated_start_time AND pi.Estimated_end_time "
+					+ "    AND pi.statusEnum NOT IN ('cancelled', 'finished') " + "GROUP BY SpotStatus");
+
+			while (rs.next()) {
+				String spotStatus = rs.getString("SpotStatus");
+				int count = rs.getInt("CountSpots");
+				data.getReservationTypes().put(spotStatus, count);
+			}
+
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return data;
+	}
+
 }

@@ -5,13 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="controllers.ManagerController" prefHeight="800.0"
 	prefWidth="1200.0">
 
-	<!-- Top Bar  -->
+	<!-- Top Bar -->
 	<top>
 		<VBox spacing="10" style="-fx-background-color: #2C3E50;">
 			<padding>
@@ -131,7 +132,32 @@
 								<Label text="Parking Types"
 									style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 								<PieChart fx:id="parkingTypesChart" prefWidth="300"
-									prefHeight="300" />
+									prefHeight="300" legendSide="TOP" />
+
+
+								<!-- Custom horizontal legend for the PieChart showing color-coded 
+									categories. Each HBox contains a colored rectangle and a label describing 
+									the parking type. Using an outer HBox to arrange all legend items in a single 
+									horizontal row. -->
+								<HBox spacing="30" style="-fx-padding: 10 0 0 10;"
+									alignment="CENTER_LEFT">
+									<HBox spacing="10" alignment="CENTER_LEFT">
+										<Rectangle width="15" height="15" fill="#27ae60" />
+										<Label text="Available" />
+									</HBox>
+									
+									<HBox spacing="10" alignment="CENTER_LEFT">
+										<Rectangle width="15" height="15" fill="#2980b9" />
+										<Label text="Reserved" />
+									</HBox>
+									<HBox spacing="10" alignment="CENTER_LEFT">
+										<Rectangle width="15" height="15" fill="#e74c3c" />
+										<Label text="Immediate" />
+									</HBox>
+								</HBox>
+
+
+
 							</VBox>
 						</HBox>
 
