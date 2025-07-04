@@ -3,8 +3,12 @@ package entities;
 import java.io.Serializable;
 
 /**
- * This class represents a message between the server and the client for the
- * ParkB system. It contains the type of the message and its content.
+ * Represents a message used for communication between the client and server in
+ * the ParkB parking system. Each message consists of a type and content.
+ * 
+ * The message type defines the kind of operation requested or responded to, and
+ * the content holds the actual data, such as objects, strings, or other
+ * serializable data used in the operation.
  * 
  * @author ParkB Team
  * @version 1.0
@@ -13,29 +17,27 @@ import java.io.Serializable;
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// Class variables *************************************************
+	// ***************************Class variables ***************************
+
 	/**
-	 * The message type for parking system operations
+	 * The type of the message indicating the operation to perform or that was
+	 * performed.
 	 */
 	private MessageType type;
 
 	/**
-	 * The content of the message, such as ParkingOrder objects, subscriber codes,
-	 * etc.
+	 * The content of the message. This can include data like subscriber info,
+	 * parking orders, response messages, etc.
 	 */
 	private Serializable content;
 
 	/**
-	 * The message type enumeration for parking system operations.
+	 * Enum representing all supported message types in the ParkB parking system.
 	 */
 	public enum MessageType {
-		/**
-		 * Register new subscriber request
-		 */
+		/** Register new subscriber request */
 		REGISTER_SUBSCRIBER,
-		/**
-		 * Registration response
-		 */
+		/** Registration response */
 		REGISTRATION_RESPONSE,
 		/**
 		 * Generate unique username request
@@ -209,40 +211,42 @@ public class Message implements Serializable {
 		 */
 		CANCELLATION_RESPONSE,
 
+		/** Request subscriber by name */
 		GET_SUBSCRIBER_BY_NAME,
-
+		/** Request all subscribers */
 		GET_ALL_SUBSCRIBERS,
-
+		/** Show all subscribers in the system */
 		SHOW_ALL_SUBSCRIBERS,
-
+		/** Show details of a specific subscriber */
 		SHOW_SUBSCRIBER_DETAILS,
-
+		/** Request subscriber data */
 		REQUEST_SUBSCRIBER_DATA,
-
+		/** Response with subscriber data */
 		SUBSCRIBER_DATA_RESPONSE,
-		
+
 		/**
-		 * Sent by the client to request the latest dashboard statistics.
-		 * Expected to be handled by the server, which queries the database
-		 * and returns a summarized view of parking data.
+		 * Sent by the client to request the latest dashboard statistics. Expected to be
+		 * handled by the server, which queries the database and returns a summarized
+		 * view of parking data.
 		 */
 		DASHBOARD_DATA_REQUEST,
 
 		/**
-		 * Sent by the server in response to DASHBOARD_DATA_REQUEST.
-		 * Contains a DashboardData object with aggregated statistics
-		 * such as total spots, occupied, available, reservations, etc.
+		 * Sent by the server in response to DASHBOARD_DATA_REQUEST. Contains a
+		 * DashboardData object with aggregated statistics such as total spots,
+		 * occupied, available, reservations, etc.
 		 */
 		DASHBOARD_DATA_RESPONSE,
 
 	}
 
-	// Constructors ******************************************************
+	// ****************************Constructors **************************
+	
 	/**
-	 * Constructs a new Message with the specified type and content.
-	 * 
-	 * @param type    the type of the message
-	 * @param content the content of the message
+	 * Constructs a new Message instance with a specific type and content.
+	 *
+	 * @param type    the type of the message (operation identifier)
+	 * @param content the content of the message, must implement {@link Serializable}
 	 */
 	public Message(MessageType type, Serializable content) {
 		this.setType(type);
