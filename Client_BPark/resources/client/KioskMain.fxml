@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.KioskController">
+
+	<!-- Original Main Content with Modern Styling -->
+	<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="500.0" spacing="25" style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF);">
+
+		<padding>
+			<Insets bottom="30.0" left="35.0" right="35.0" top="30.0" />
+		</padding>
+
+		<!-- Top Bar with Check Availability -->
+		<HBox alignment="CENTER_RIGHT" prefWidth="500" />
+      <ImageView fitHeight="57.0" fitWidth="428.0">
+         <image>
+            <Image url="@../images/bpark.png" />
+         </image>
+      </ImageView>
+
+		<!-- Modern Header with bPark Branding -->
+		<VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" prefWidth="434.0" spacing="15" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 20; -fx-padding: 30;">
+			<effect>
+				<DropShadow color="#0000001A" offsetY="5" radius="15" spread="0.2" />
+			</effect>
+   			
+      			<HBox alignment="CENTER" spacing="20">
+   				<!-- bPark Logo -->
+   				<StackPane />
+   				
+      				<VBox alignment="CENTER_LEFT" spacing="5">
+   					<Label style="-fx-text-fill: white; -fx-font-size: 48px; -fx-font-weight: bold; -fx-font-family: 'Segoe UI', sans-serif;" text="Welcome">
+   						<effect>
+   							<DropShadow color="#00000040" offsetY="2" radius="8" />
+   						</effect>
+   					</Label>
+   				</VBox>
+   			</HBox>
+		</VBox>
+
+		<!-- Login Options Card -->
+		<VBox maxWidth="420" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 30;">
+			<effect>
+				<DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+			</effect>
+
+			<!-- Card Header -->
+			<HBox alignment="CENTER" spacing="12">
+				<HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #3B5CAD, #4A69BD); -fx-background-radius: 10; -fx-padding: 10;">
+					<Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="🔐" />
+				</HBox>
+				<Label style="-fx-text-fill: #2D3748; -fx-font-size: 20px; -fx-font-weight: bold;" text="Choose Login Method" />
+			</HBox>
+
+			<Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent);" />
+
+			<!-- Login Buttons - Keep original text and handlers -->
+			<VBox alignment="CENTER" spacing="15">
+				<Button fx:id="btnLoginByID" onAction="#handleLoginByID" prefHeight="50" prefWidth="300" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Login by ID">
+					<graphic>
+						<HBox alignment="CENTER" spacing="10">
+							<Label style="-fx-font-size: 20px;" text="👤" />
+						</HBox>
+					</graphic>
+					<effect>
+						<DropShadow color="#3B5CAD40" offsetY="3" radius="15" spread="0.3" />
+					</effect>
+				</Button>
+
+				<Button fx:id="btnLoginByRF" onAction="#handleLoginByRF" prefHeight="50" prefWidth="300" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Scan RF">
+					<graphic>
+						<HBox alignment="CENTER" spacing="10">
+							<Label style="-fx-font-size: 20px;" text="📡" />
+						</HBox>
+					</graphic>
+					<effect>
+						<DropShadow color="#4CAF5040" offsetY="3" radius="15" spread="0.3" />
+					</effect>
+				</Button>
+
+				<!-- Visual separator -->
+				<HBox alignment="CENTER" spacing="10" style="-fx-padding: 10 0 10 0;">
+					<Separator prefWidth="100" style="-fx-background-color: #E2E8F0;" />
+					<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 12px;" text="or" />
+					<Separator prefWidth="100" style="-fx-background-color: #E2E8F0;" />
+				</HBox>
+
+				<!-- Exit Kiosk button -->
+				<Button fx:id="btnExitKiosk" onAction="#handleExitKiosk" prefHeight="45" prefWidth="300" style="-fx-background-color: linear-gradient(to right, #F56565, #E53E3E); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-cursor: hand;" text="Exit Kiosk">
+					<graphic>
+						<HBox alignment="CENTER" spacing="8">
+							<Label style="-fx-font-size: 18px;" text="⏻" />
+						</HBox>
+					</graphic>
+					<effect>
+						<DropShadow color="#F5656540" offsetY="2" radius="12" spread="0.3" />
+					</effect>
+				</Button>
+			</VBox>
+		</VBox>
+
+		<!-- Help Section -->
+		<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="420" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="406.0" spacing="8" style="-fx-background-color: #F7FAFC; -fx-background-radius: 12; -fx-padding: 15; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
+			<HBox alignment="CENTER" spacing="8">
+				<Label style="-fx-text-fill: #4A5568; -fx-font-size: 13px; -fx-font-weight: bold;" text="Need assistance?" />
+			</HBox>
+			<Label style="-fx-text-fill: #718096; -fx-font-size: 12px;" text="Please contact our support team or ask staff for help" wrapText="true" />
+		</VBox>
+			<Button fx:id="btnCheckAvailability" onAction="#handleCheckAvailability" style="-fx-background-color: linear-gradient(to right, #ED8936, #DD6B20); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;" text="📊 Check Availability">
+				<effect>
+					<DropShadow color="#ED893640" offsetY="2" radius="10" spread="0.3" />
+				</effect>
+			</Button>
+
+		<!-- Footer -->
+		<VBox alignment="CENTER" spacing="5">
+			<Separator prefWidth="250.0" style="-fx-background-color: linear-gradient(to right, transparent, #CBD5E0, transparent);" />
+			<HBox alignment="CENTER" spacing="8">
+				<Label style="-fx-font-size: 12px; -fx-text-fill: #3B5CAD;" text="🚗" />
+				<Label style="-fx-text-fill: #3B5CAD; -fx-font-size: 12px; -fx-font-weight: bold;" text="bPark Technologies" />
+				<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 11px;" text="•" />
+				<Label style="-fx-text-fill: #718096; -fx-font-size: 11px;" text="support@bpark.com" />
+			</HBox>
+			<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 10px;" text="© 2025 BPark - All rights reserved" />
+		</VBox>
+
+	</VBox>
+
+</StackPane>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox alignment="CENTER" minHeight="500.0" minWidth="400.0" prefHeight="682.0" prefWidth="465.0" spacing="20" style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LauncherController">
+	
+	<padding>
+		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+	</padding>
+   <ImageView fitHeight="50.0" fitWidth="387.0">
+      <image>
+         <Image url="@../images/bpark.png" />
+      </image>
+   </ImageView>
+
+	<!-- Modern Header with Brand Colors -->
+	<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="369.0" spacing="15" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 15; -fx-padding: 20;">
+		<effect>
+			<DropShadow color="#0000001A" offsetY="3" radius="10" spread="0.2" />
+		</effect>
+		
+		<HBox alignment="CENTER" spacing="15">
+			<!-- bPark Logo Style -->
+			<StackPane />
+			
+			<VBox alignment="CENTER_LEFT" spacing="3">
+      				<Label style="-fx-text-fill: #FFFFFFCC; -fx-font-size: 14px; -fx-font-style: italic;" text="Connection Setup" />
+			</VBox>
+		</HBox>
+	</VBox>
+
+	<!-- Server Configuration Card -->
+	<VBox alignment="CENTER" maxWidth="400.0" spacing="18" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;">
+		<effect>
+			<DropShadow color="#0000001A" offsetY="3" radius="15" spread="0.1" />
+		</effect>
+
+		<HBox alignment="CENTER" spacing="10">
+			<HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #3B5CAD, #4A69BD); -fx-background-radius: 10; -fx-padding: 8;">
+				<Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="🌐" />
+			</HBox>
+			<Label style="-fx-text-fill: #2D3748; -fx-font-size: 18px; -fx-font-weight: bold;" text="Server Configuration" />
+		</HBox>
+
+		<GridPane alignment="CENTER" hgap="20" vgap="15">
+			<columnConstraints>
+				<ColumnConstraints halignment="CENTER" minWidth="40" prefWidth="40" />
+				<ColumnConstraints halignment="RIGHT" minWidth="100" prefWidth="100" />
+				<ColumnConstraints minWidth="180" prefWidth="180" />
+			</columnConstraints>
+
+			<!-- IP Address Row -->
+			<HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+				<Label style="-fx-font-size: 14px;" text="📍" />
+			</HBox>
+			<Label style="-fx-text-fill: #4A5568; -fx-font-size: 14px;" text="Server IP:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+			<TextField fx:id="txtServerIP" promptText="Enter server IP" style="-fx-background-color: #F7FAFC; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-border-width: 1; -fx-text-fill: #2D3748; -fx-font-size: 13px; -fx-padding: 8 12 8 12;" text="localhost" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+			<!-- Port Row -->
+			<HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+				<Label style="-fx-font-size: 14px;" text="🔌" />
+			</HBox>
+			<Label style="-fx-text-fill: #4A5568; -fx-font-size: 14px;" text="Port:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			<TextField fx:id="txtServerPort" promptText="Enter port" style="-fx-background-color: #F7FAFC; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-border-width: 1; -fx-text-fill: #2D3748; -fx-font-size: 13px; -fx-padding: 8 12 8 12;" text="5555" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+		</GridPane>
+	</VBox>
+
+	<!-- Application Selection Card (Initially Hidden) -->
+	<VBox fx:id="vboxAppSelection" alignment="CENTER" managed="false" maxWidth="400.0" spacing="18" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;" visible="false">
+		<effect>
+			<DropShadow color="#0000001A" offsetY="3" radius="15" spread="0.1" />
+		</effect>
+
+		<HBox alignment="CENTER" spacing="10">
+			<HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #4CAF50, #45A049); -fx-background-radius: 10; -fx-padding: 8;">
+				<Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="🚀" />
+			</HBox>
+			<Label style="-fx-text-fill: #2D3748; -fx-font-size: 18px; -fx-font-weight: bold;" text="Launch Application" />
+		</HBox>
+
+		<HBox alignment="CENTER" spacing="20">
+			<Button fx:id="btnClientApp" onAction="#handleClientApp" prefWidth="150" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 25 12 25; -fx-cursor: hand;" text="👤 Client Portal">
+				<effect>
+					<DropShadow color="#3B5CAD40" offsetY="2" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+
+			<Button fx:id="btnKioskApp" minWidth="-Infinity" onAction="#handleKioskApp" prefHeight="44.0" prefWidth="172.0" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 25 12 25; -fx-cursor: hand;" text=" Kiosk Terminal">
+				<effect>
+					<DropShadow color="#4CAF5040" offsetY="2" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+		</HBox>
+	</VBox>
+
+	<!-- Status Panel -->
+	<VBox alignment="CENTER" maxWidth="400.0" spacing="10" style="-fx-background-color: #F7FAFC; -fx-background-radius: 12; -fx-padding: 15; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
+		
+		<HBox alignment="CENTER" spacing="8">
+			<Circle fx:id="statusIndicator" fill="#A0AEC0" radius="4" />
+			<Label fx:id="lblStatus" style="-fx-text-fill: #4A5568; -fx-font-size: 13px; -fx-font-weight: normal;" text="Enter server details to connect" wrapText="true" />
+		</HBox>
+	</VBox>
+
+	<!-- Action Button -->
+	<HBox alignment="CENTER" spacing="20">
+		<Button fx:id="btnTestConnection" onAction="#handleTestConnection" prefHeight="53.0" prefWidth="222.0" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 14 35 14 35; -fx-cursor: hand;" text="🔗 Test Connection">
+			<effect>
+				<DropShadow color="#4CAF5040" offsetY="3" radius="15" spread="0.3" />
+			</effect>
+		</Button>
+	</HBox>
+
+	<!-- Modern Footer -->
+	<VBox alignment="CENTER" spacing="5">
+		<Separator prefWidth="200.0" style="-fx-background-color: linear-gradient(to right, transparent, #CBD5E0, transparent);" />
+		<HBox alignment="CENTER" spacing="6">
+			<Label style="-fx-font-size: 11px; -fx-text-fill: #3B5CAD;" text="🚗" />
+			<Label style="-fx-text-fill: #3B5CAD; -fx-font-size: 11px; -fx-font-weight: bold;" text="bPark Automatic Parking System" />
+			<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 10px;" text="•" />
+			<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 10px;" text="v2.0" />
+		</HBox>
+	</VBox>
+
+</VBox>

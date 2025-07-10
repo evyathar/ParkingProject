@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+
+<VBox alignment="CENTER" prefHeight="280.0" prefWidth="420.0" spacing="18" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InfoDialogController">
+    
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+    
+    <!-- Success Icon Circle -->
+    <Circle fill="#D1FAE5" radius="32">
+        <effect>
+            <DropShadow color="#4CAF5040" radius="12" spread="0.3" />
+        </effect>
+    </Circle>
+    
+    <!-- Success Icon Overlay -->
+    <Label layoutX="190" layoutY="40" style="-fx-font-size: 32px; -fx-translate-y: -78;" text="✓" />
+    
+    <!-- Header Text -->
+    <Label fx:id="lblHeader" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1F2937;" text="Success" textAlignment="CENTER" />
+    
+    <!-- Message Text -->
+    <Label fx:id="lblMessage" alignment="CENTER" maxWidth="360" prefWidth="360" style="-fx-font-size: 14px; -fx-text-fill: #6B7280; -fx-line-spacing: 2;" text="Operation completed successfully" textAlignment="CENTER" wrapText="true" />
+    
+    <!-- OK Button -->
+    <Button fx:id="btnOK" defaultButton="true" onAction="#handleOK" prefHeight="42" prefWidth="140" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 21; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="OK">
+        <effect>
+            <DropShadow color="#4CAF5040" offsetY="2" radius="8" spread="0.3" />
+        </effect>
+    </Button>
+    
+</VBox>

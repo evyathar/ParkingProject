@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="499.0" spacing="20" style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.KioskDashboardController">
+
+	<padding>
+		<Insets bottom="25" left="30" right="30" top="25" />
+	</padding>
+
+	<!-- Top Bar with User Info - Modernized -->
+	<HBox alignment="CENTER" maxWidth="500" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 12;" VBox.vgrow="NEVER">
+		<effect>
+			<DropShadow color="#0000000D" offsetY="2" radius="8" spread="0.1" />
+		</effect>
+		
+		<HBox alignment="CENTER" spacing="8">
+			<Circle fill="#4CAF50" radius="5">
+				<effect>
+					<DropShadow color="#4CAF50" radius="6" spread="0.6" />
+				</effect>
+			</Circle>
+			<Label fx:id="lblUserInfo" style="-fx-text-fill: #2D3748; -fx-font-size: 14px; -fx-font-weight: bold;" text="User: " />
+		</HBox>
+		<Region HBox.hgrow="ALWAYS" />
+		<Label style="-fx-text-fill: #4CAF50; -fx-font-size: 12px; -fx-font-weight: bold;" text="Session Active" />
+	</HBox>
+   <ImageView fitHeight="58.0" fitWidth="432.0">
+      <image>
+         <Image url="@../images/bpark.png" />
+      </image>
+   </ImageView>
+
+	<!-- Button Section - Modernized Card -->
+	<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="430.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;">
+		<effect>
+			<DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+		</effect>
+
+		<!-- Parking Services Section -->
+		<Label style="-fx-text-fill: #718096; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 0 0 5 0;" text="PARKING SERVICES" />
+		
+		<VBox spacing="12">
+			<Button fx:id="btnEnterParking" onAction="#handleEnterParking" prefHeight="55" prefWidth="390" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Enter Parking">
+				<graphic>
+					<Label style="-fx-font-size: 20px;" text="🚗➡" />
+				</graphic>
+				<effect>
+					<DropShadow color="#4CAF5040" offsetY="3" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+
+			<Button fx:id="btnRetrieveCar" onAction="#handleRetrieveCar" prefHeight="55" prefWidth="390" style="-fx-background-color: linear-gradient(to right, #ED8936, #DD6B20); -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Retrieve Car">
+				<graphic>
+					<Label style="-fx-font-size: 20px;" text="🚗⬅" />
+				</graphic>
+				<effect>
+					<DropShadow color="#ED893640" offsetY="3" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+		</VBox>
+
+		<Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent); -fx-padding: 5 0 5 0;" />
+
+		<!-- Additional Services Section -->
+		<Label style="-fx-text-fill: #718096; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 0 0 5 0;" text="ADDITIONAL SERVICES" />
+		
+		<VBox spacing="12">
+			<Button fx:id="btnActivateReservation" onAction="#handleActivateReservation" prefHeight="50" prefWidth="390" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Activate Reservation">
+				<graphic>
+					<Label style="-fx-font-size: 18px;" text="📅" />
+				</graphic>
+				<effect>
+					<DropShadow color="#3B5CAD40" offsetY="3" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+
+			<Button fx:id="btnForgotCode" onAction="#handleForgotCode" prefHeight="50" prefWidth="390" style="-fx-background-color: linear-gradient(to right, #9F7AEA, #805AD5); -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="Forgot Code">
+				<graphic>
+					<Label style="-fx-font-size: 18px;" text="🔑" />
+				</graphic>
+				<effect>
+					<DropShadow color="#9F7AEA40" offsetY="3" radius="12" spread="0.3" />
+				</effect>
+			</Button>
+		</VBox>
+
+		<Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent); -fx-padding: 5 0 5 0;" />
+
+		<!-- Exit button -->
+		<Button fx:id="btnExit" onAction="#handleExit" prefHeight="45" prefWidth="390" style="-fx-background-color: linear-gradient(to right, #718096, #4A5568); -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-cursor: hand;" text="Exit">
+			<effect>
+				<DropShadow color="#71809640" offsetY="2" radius="10" spread="0.3" />
+			</effect>
+		</Button>
+	</VBox>
+
+	<!-- Help/Info Box -->
+	<HBox alignment="CENTER" maxWidth="440" spacing="15" style="-fx-background-color: #F0FDF4; -fx-background-radius: 12; -fx-padding: 12; -fx-border-color: #4CAF50; -fx-border-radius: 12; -fx-border-width: 1;">
+		<Label style="-fx-font-size: 16px;" text="💡" />
+		<VBox spacing="3">
+			<Label style="-fx-text-fill: #2D3748; -fx-font-size: 12px; -fx-font-weight: bold;" text="Quick Tip:" />
+			<Label style="-fx-text-fill: #4A5568; -fx-font-size: 11px;" text="Keep your parking code safe. You'll need it to retrieve your vehicle." wrapText="true" />
+		</VBox>
+	</HBox>
+
+	<!-- Footer -->
+	<VBox alignment="CENTER" spacing="4">
+		<Separator prefWidth="200.0" style="-fx-background-color: linear-gradient(to right, transparent, #CBD5E0, transparent);" />
+		<HBox alignment="CENTER" spacing="6">
+			<Label style="-fx-font-size: 11px; -fx-text-fill: #718096;" text="📞" />
+			<Label style="-fx-text-fill: #718096; -fx-font-size: 11px;" text="Need help? Contact support@bpark.com" />
+		</HBox>
+		<Label style="-fx-text-fill: #A0AEC0; -fx-font-size: 10px;" text="© 2025 BPark - All rights reserved" />
+	</VBox>
+
+</VBox>

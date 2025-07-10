@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="700.0" prefWidth="1200.0" spacing="0" style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParkingHistoryController">
+
+    <!-- Top Bar -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-padding: 15 25 15 25;">
+        <effect>
+            <DropShadow color="#0000001A" offsetY="3" radius="10" spread="0.2" />
+        </effect>
+        
+        <Label style="-fx-font-size: 24px;" text="📜" />
+        <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="BPark Parking History">
+            <effect>
+                <DropShadow color="#00000040" offsetY="1" radius="5" />
+            </effect>
+        </Label>
+        
+        <Region HBox.hgrow="ALWAYS" />
+        
+        <Label fx:id="lblUserName" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="User: --" />
+        
+        <Button fx:id="btnClose" onAction="#handleClose" style="-fx-background-color: linear-gradient(to right, #F56565, #E53E3E); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;" text="❌ Close">
+            <effect>
+                <DropShadow color="#F5656540" offsetY="2" radius="10" spread="0.3" />
+            </effect>
+        </Button>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+        <VBox spacing="10.0" style="-fx-background-color: transparent; -fx-padding: 25;">
+            
+            <!-- Statistics Cards -->
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0">
+                <!-- Late Exits Info -->
+                <VBox prefHeight="100.0" prefWidth="220.0" style="-fx-background-color: #FEF2F2; -fx-background-radius: 15; -fx-padding: 20; -fx-border-color: #FEE2E2; -fx-border-radius: 15; -fx-border-width: 1;">
+                    <HBox spacing="8">
+                        <Label style="-fx-font-size: 16px;" text="⚠" />
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #991B1B;" text="Late Exit Information" />
+                    </HBox>
+                    <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="View your late exit history " wrapText="true" />
+               <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="and any associated fees" wrapText="true" />
+                </VBox>
+                <!-- Total Sessions Card -->
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;">
+                    <effect>
+                        <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+                    </effect>
+                    <Label style="-fx-font-size: 24px;" text="📊" />
+                    <Label style="-fx-text-fill: #718096; -fx-font-size: 14px;" text="Total Sessions" />
+                    <Label fx:id="lblTotalSessions" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #2D3748;" text="0" />
+                </VBox>
+
+                <!-- Active Sessions Card -->
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;">
+                    <effect>
+                        <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+                    </effect>
+                    <Label style="-fx-font-size: 24px;" text="🚗" />
+                    <Label style="-fx-text-fill: #718096; -fx-font-size: 14px;" text="Active Sessions" />
+                    <Label fx:id="lblActiveSessions" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #16A34A;" text="0" />
+                </VBox>
+
+                <!-- Completed Sessions Card -->
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;">
+                    <effect>
+                        <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+                    </effect>
+                    <Label style="-fx-font-size: 24px;" text="✅" />
+                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="130.0" style="-fx-text-fill: #718096; -fx-font-size: 14px;" text="Completed Sessions" />
+                    <Label fx:id="lblCompletedSessions" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #2563EB;" text="0" />
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+                </VBox>
+
+                <!-- Extensions Info -->
+                <VBox prefHeight="100.0" prefWidth="220.0" style="-fx-background-color: #EFF6FF; -fx-background-radius: 15; -fx-padding: 20; -fx-border-color: #DBEAFE; -fx-border-radius: 15; -fx-border-width: 1;">
+                    <HBox spacing="8">
+                        <Label style="-fx-font-size: 16px;" text="⏰" />
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #1E3A8A;" text="Parking Extensions" />
+                    </HBox>
+                    <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="Track your parking time extensions and usage patterns" wrapText="true" />
+                </VBox>
+            <VBox.margin>
+               <Insets left="60.0" top="-20.0" />
+            </VBox.margin>
+            </HBox>
+
+            <!-- History Table Card -->
+            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 30;">
+                <effect>
+                    <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+                </effect>
+                
+                <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="1088.0" spacing="15">
+                    <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #3B5CAD, #4A69BD); -fx-background-radius: 10; -fx-padding: 10;">
+                        <Label prefWidth="20.0" style="-fx-font-size: 20px; -fx-text-fill: white;" text="📋" />
+                    </HBox>
+                    <Label style="-fx-text-fill: #2D3748; -fx-font-size: 20px; -fx-font-weight: bold;" text="Parking History Details" />
+                    
+                    <Region HBox.hgrow="ALWAYS" />
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #4A5568;" text="Filter:" />
+                        <ComboBox fx:id="comboStatusFilter" onAction="#handleFilterChange" prefWidth="180" promptText="All Sessions" style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1;" />
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                    </HBox>
+               <VBox.margin>
+                  <Insets top="-20.0" />
+               </VBox.margin>
+                </HBox>
+                
+                <Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent);">
+               <VBox.margin>
+                  <Insets top="-15.0" />
+               </VBox.margin></Separator>
+                
+                <TableView fx:id="tableHistory" prefHeight="400" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colCode" prefWidth="90" text="Code" />
+                        <TableColumn fx:id="colDate" prefWidth="110" text="Date" />
+                        <TableColumn fx:id="colEntryTime" prefWidth="130" text="Entry Time" />
+                        <TableColumn fx:id="colExitTime" prefWidth="130" text="Exit Time" />
+                        <TableColumn fx:id="colDuration" prefWidth="150" text="Duration" />
+                        <TableColumn fx:id="colSpotNumber" prefWidth="90" text="Spot" />
+                        <TableColumn fx:id="colOrderType" prefWidth="100" text="Type" />
+                        <TableColumn fx:id="colStatus" prefWidth="110" text="Status" />
+                        <TableColumn fx:id="colLate" prefWidth="80" text="Late" />
+                        <TableColumn fx:id="colExtended" prefWidth="90" text="Extended" />
+                    </columns>
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="10">
+                            <Label style="-fx-font-size: 36px;" text="📂" />
+                            <Label style="-fx-text-fill: #718096; -fx-font-size: 16px;" text="No parking history to display" />
+                        </VBox>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Info Cards -->
+            <HBox alignment="CENTER" spacing="10.0" />
+
+        </VBox>
+    </ScrollPane>
+
+    <!-- Status Bar -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-background-color: white; -fx-padding: 10 20 10 20; -fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0;">
+        <Label fx:id="lblStatus" style="-fx-font-size: 12px;" text="Ready" />
+        <Separator orientation="VERTICAL" style="-fx-background-color: #E2E8F0;" />
+        <Label style="-fx-font-size: 12px;" text="Last Update: Now" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label style="-fx-font-size: 11px; -fx-text-fill: #718096;" text="BPark Parking History v2.0" />
+    </HBox>
+
+</VBox>

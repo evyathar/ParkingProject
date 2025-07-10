@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="340.0" prefWidth="440.0" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SuccessDialogController">
+    
+    <padding>
+        <Insets bottom="30" left="35" right="35" top="30" />
+    </padding>
+    
+    <!-- Success Icon Circle -->
+    <Circle fill="#D1FAE5" radius="40">
+        <effect>
+            <DropShadow color="#4CAF5040" radius="15" spread="0.3" />
+        </effect>
+    </Circle>
+    
+    <!-- Success Icon Overlay -->
+    <Label layoutX="210" layoutY="50" style="-fx-font-size: 36px; -fx-translate-y: -95;" text="✓" />
+    
+    <!-- Header Text -->
+    <Label fx:id="lblHeader" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F2937;" text="Reservation Success!" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="22.0" />
+        </font>
+    </Label>
+    
+    <!-- Message Text (Multi-line for reservation details) -->
+    <VBox alignment="CENTER" spacing="8">
+        <Label fx:id="lblMessage" alignment="CENTER" maxWidth="350" prefWidth="350" style="-fx-font-size: 15px; -fx-text-fill: #4A5568; -fx-line-spacing: 3;" text="Reservation confirmed" textAlignment="CENTER" wrapText="true" />
+        
+        <!-- Reservation Details Box -->
+        <VBox fx:id="detailsBox" alignment="CENTER" spacing="6" style="-fx-background-color: #F0FDF4; -fx-background-radius: 12; -fx-padding: 15; -fx-border-color: #4CAF50; -fx-border-radius: 12; -fx-border-width: 1;">
+            <Label fx:id="lblDate" style="-fx-font-size: 14px; -fx-text-fill: #166534; -fx-font-weight: bold;" text="Date: --" />
+            <Label fx:id="lblCode" style="-fx-font-size: 16px; -fx-text-fill: #166534; -fx-font-weight: bold;" text="Code: --" />
+            <Label fx:id="lblSpot" style="-fx-font-size: 14px; -fx-text-fill: #166534; -fx-font-weight: bold;" text="Spot: --" />
+        </VBox>
+    </VBox>
+    
+    <!-- OK Button -->
+    <Button fx:id="btnOK" defaultButton="true" onAction="#handleOK" prefHeight="45" prefWidth="160" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 23; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="OK">
+        <effect>
+            <DropShadow color="#4CAF5040" offsetY="3" radius="10" spread="0.3" />
+        </effect>
+    </Button>
+    
+</VBox>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+
+<VBox spacing="0" xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.AttendantController" 
+      prefHeight="700.0" prefWidth="1100.0"
+      style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF);">
+
+    <!-- Top Bar -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-padding: 15 25 15 25;">
+        <effect>
+            <DropShadow color="#0000001A" offsetY="3" radius="10" spread="0.2"/>
+        </effect>
+        
+        <Label text="👮" style="-fx-font-size: 24px;"/>
+        <Label text="BPark Attendant Portal" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;">
+            <effect>
+                <DropShadow color="#00000040" offsetY="1" radius="5"/>
+            </effect>
+        </Label>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <Label fx:id="lblParkingStatus" text="🚗 Active Spots: --" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        
+        <Button text="🔄 Refresh" onAction="#loadActiveParkings" 
+                style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;">
+            <effect>
+                <DropShadow color="#4CAF5040" offsetY="2" radius="10" spread="0.3"/>
+            </effect>
+        </Button>
+        
+        <Button fx:id="btnLogout" text="🚪 Logout" onAction="#handleLogout" 
+                style="-fx-background-color: linear-gradient(to right, #F56565, #E53E3E); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;">
+            <effect>
+                <DropShadow color="#F5656540" offsetY="2" radius="10" spread="0.3"/>
+            </effect>
+        </Button>
+        
+        <Button fx:id="btnExit" text="⏻ Exit" onAction="#handleExit" 
+                style="-fx-background-color: linear-gradient(to right, #718096, #4A5568); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;">
+            <effect>
+                <DropShadow color="#71809640" offsetY="2" radius="10" spread="0.3"/>
+            </effect>
+        </Button>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <VBox VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
+        <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+            <tabs>
+                <!-- Register New Subscriber Tab -->
+                <Tab text="➕ Register Subscriber">
+                    <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent;">
+                        <VBox spacing="25" style="-fx-background-color: transparent; -fx-padding: 20;">
+                            
+                            <!-- Registration Form Card -->
+                            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 30;" maxWidth="700">
+                                <effect>
+                                    <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1"/>
+                                </effect>
+                                
+                                <HBox alignment="CENTER_LEFT" spacing="12">
+                                    <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #4CAF50, #45A049); -fx-background-radius: 10; -fx-padding: 10;">
+                                        <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="👤"/>
+                                    </HBox>
+                                    <Label text="New Subscriber Registration" style="-fx-text-fill: #2D3748; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+                                </HBox>
+                                
+                                <Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent);"/>
+                                
+                                <!-- Form Fields -->
+                                <GridPane hgap="20" vgap="15">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="40" prefWidth="40"/>
+                                        <ColumnConstraints minWidth="140" prefWidth="140"/>
+                                        <ColumnConstraints minWidth="300" prefWidth="400"/>
+                                    </columnConstraints>
+                                    
+                                    <!-- Full Name -->
+                                    <HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" 
+                                          GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                        <Label style="-fx-font-size: 14px;" text="👤"/>
+                                    </HBox>
+                                    <Label text="Full Name:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" 
+                                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                    <TextField fx:id="txtName" promptText="Enter subscriber's full name"
+                                              style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"
+                                              GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                                    
+                                    <!-- Phone Number -->
+                                    <HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" 
+                                          GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                        <Label style="-fx-font-size: 14px;" text="📱"/>
+                                    </HBox>
+                                    <Label text="Phone Number:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" 
+                                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                    <TextField fx:id="txtPhone" promptText="05X-XXXXXXX"
+                                              style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"
+                                              GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                    
+                                    <!-- Email -->
+                                    <HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" 
+                                          GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                        <Label style="-fx-font-size: 14px;" text="📧"/>
+                                    </HBox>
+                                    <Label text="Email:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" 
+                                           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                    <TextField fx:id="txtEmail" promptText="email@example.com"
+                                              style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"
+                                              GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                    
+                                    <!-- Car Number -->
+                                    <HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" 
+                                          GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                        <Label style="-fx-font-size: 14px;" text="🚗"/>
+                                    </HBox>
+                                    <Label text="Car Number:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" 
+                                           GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                    <TextField fx:id="txtCarNumber" promptText="XX-XXX-XX"
+                                              style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"
+                                              GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                                    
+                                    <!-- Username -->
+                                    <HBox alignment="CENTER" style="-fx-background-color: #EDF2F7; -fx-background-radius: 8; -fx-padding: 6;" 
+                                          GridPane.columnIndex="0" GridPane.rowIndex="4">
+                                        <Label style="-fx-font-size: 14px;" text="🔑"/>
+                                    </HBox>
+                                    <Label text="Username:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" 
+                                           GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                    <HBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                        <TextField fx:id="txtUsername" promptText="Choose username" HBox.hgrow="ALWAYS"
+                                                  style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"/>
+                                        <Button text="🎲 Generate" onAction="#handleGenerateUsername" 
+                                                style="-fx-background-color: linear-gradient(to right, #9F7AEA, #805AD5); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; -fx-cursor: hand;">
+                                            <effect>
+                                                <DropShadow color="#9F7AEA40" offsetY="2" radius="10" spread="0.3"/>
+                                            </effect>
+                                        </Button>
+                                    </HBox>
+                                </GridPane>
+                                
+                                <!-- Action Buttons -->
+                                <HBox spacing="15" alignment="CENTER">
+                                    <Button text="✅ Register Subscriber" onAction="#handleRegisterSubscriber"
+                                            style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 30 12 30; -fx-cursor: hand;">
+                                        <effect>
+                                            <DropShadow color="#4CAF5040" offsetY="3" radius="12" spread="0.3"/>
+                                        </effect>
+                                    </Button>
+                                    
+                                    <Button text="🗑️ Clear Form" onAction="#clearRegistrationForm"
+                                            style="-fx-background-color: linear-gradient(to right, #718096, #4A5568); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 30 12 30; -fx-cursor: hand;">
+                                        <effect>
+                                            <DropShadow color="#71809640" offsetY="3" radius="12" spread="0.3"/>
+                                        </effect>
+                                    </Button>
+                                </HBox>
+                                
+                                <Label fx:id="lblRegistrationStatus" style="-fx-font-size: 14px; -fx-font-weight: bold;" alignment="CENTER" wrapText="true"/>
+                            </VBox>
+                            
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <!-- Active Parkings Tab -->
+                <Tab text="🚗 Active Parkings">
+                    <VBox spacing="20" style="-fx-padding: 20;">
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;" VBox.vgrow="ALWAYS">
+                            <effect>
+                                <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1"/>
+                            </effect>
+                            
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #ED8936, #DD6B20); -fx-background-radius: 10; -fx-padding: 10;">
+                                    <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="🚗"/>
+                                </HBox>
+                                <Label text="Current Active Parking Sessions" style="-fx-text-fill: #2D3748; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button text="🔄 Refresh Now" onAction="#loadActiveParkings" 
+                                        style="-fx-background-color: linear-gradient(to right, #ED8936, #DD6B20); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;">
+                                    <effect>
+                                        <DropShadow color="#ED893640" offsetY="2" radius="10" spread="0.3"/>
+                                    </effect>
+                                </Button>
+                                <Label text="(Auto-refresh: 30s)" style="-fx-font-style: italic; -fx-text-fill: #718096;"/>
+                            </HBox>
+                            
+                            <TableView fx:id="tableActiveParkings" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colParkingCode" text="Parking Code" prefWidth="10"/>
+                                    <TableColumn fx:id="colSubscriberName" text="Subscriber" prefWidth="150"/>
+                                    <TableColumn fx:id="colSpot" text="Spot" prefWidth="95"/>
+                                    <TableColumn fx:id="colEntryTime" text="Entry Time" prefWidth="135"/>
+                                    <TableColumn fx:id="colExpectedExit" text="Expected Exit" prefWidth="135"/>
+                                    <TableColumn fx:id="colType" text="Order?" prefWidth="110"/>
+                                    <TableColumn fx:id="colCode" text="User Code" prefWidth="110"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </Tab>
+
+                <!-- Subscribers Tab -->
+                <Tab text="👥 Subscribers">
+                    <VBox spacing="20" style="-fx-padding: 20;">
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;" VBox.vgrow="ALWAYS">
+                            <effect>
+                                <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1"/>
+                            </effect>
+                            
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #9F7AEA, #805AD5); -fx-background-radius: 10; -fx-padding: 10;">
+                                    <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="👥"/>
+                                </HBox>
+                                <Label text="All Subscribers" style="-fx-text-fill: #2D3748; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button text="🔄 Refresh" onAction="#loadSubscribers" 
+                                        style="-fx-background-color: linear-gradient(to right, #9F7AEA, #805AD5); -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 18 8 18; -fx-cursor: hand;">
+                                    <effect>
+                                        <DropShadow color="#9F7AEA40" offsetY="2" radius="10" spread="0.3"/>
+                                    </effect>
+                                </Button>
+                            </HBox>
+                            
+                            <TableView fx:id="tableSubscribers" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colUserID" text="User ID" prefWidth="80"/>
+                                    <TableColumn fx:id="colSubName" text="Name" prefWidth="120"/>
+                                    <TableColumn fx:id="colSubPhone" text="Phone" prefWidth="110"/>
+                                    <TableColumn fx:id="colSubEmail" text="Email" prefWidth="180"/>
+                                    <TableColumn fx:id="colSubCar" text="Car Number" prefWidth="110"/>
+                                    <TableColumn fx:id="colSubUsername" text="Username" prefWidth="130"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </Tab>
+
+                <!-- Subscriber History Tab -->
+                <Tab text="📜 History">
+                    <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+                        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 40;" maxWidth="500">
+                            <effect>
+                                <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1"/>
+                            </effect>
+                            
+                            <HBox alignment="CENTER" spacing="12">
+                                <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #3B5CAD, #4A69BD); -fx-background-radius: 10; -fx-padding: 10;">
+                                    <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="📜"/>
+                                </HBox>
+                                <Label text="View Subscriber History" style="-fx-text-fill: #2D3748; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                            </HBox>
+                            
+                            <Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent);"/>
+                            
+                            <VBox spacing="10" alignment="CENTER">
+                                <Label text="Enter Username:" style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                <TextField fx:id="subscriberIdField" promptText="Enter username..." 
+                                          style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;"
+                                          prefWidth="300"/>
+                                <Button fx:id="btnViewHistory" text="View History" onAction="#handleSubscriberIdEnter"
+                                        style="-fx-background-color: linear-gradient(to right, #3B5CAD, #4A69BD); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 30 12 30; -fx-cursor: hand;">
+                                    <effect>
+                                        <DropShadow color="#3B5CAD40" offsetY="3" radius="12" spread="0.3"/>
+                                    </effect>
+                                </Button>
+                            </VBox>
+                        </VBox>
+                    </VBox>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </VBox>
+
+    <!-- Status Bar -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-background-color: white; -fx-padding: 10 20 10 20; -fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0;">
+        <Label text="⚡ Status: Connected" style="-fx-text-fill: #16A34A; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+        <Separator orientation="VERTICAL" style="-fx-background-color: #E2E8F0;"/>
+        <Label fx:id="lblAttendantInfo" text="Attendant: --" style="-fx-font-size: 12px;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="BPark Attendant Portal v2.0" style="-fx-font-size: 11px; -fx-text-fill: #718096;"/>
+    </HBox>
+
+</VBox>

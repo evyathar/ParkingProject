@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+
+<VBox alignment="CENTER" prefHeight="280.0" prefWidth="420.0" spacing="18" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ErrorDialogController">
+    
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+    
+    <!-- Error Icon Circle -->
+    <Circle fill="#FEE2E2" radius="32">
+        <effect>
+            <DropShadow color="#EF444440" radius="12" spread="0.3" />
+        </effect>
+    </Circle>
+    
+    <!-- Error Icon Overlay -->
+    <Label layoutX="190" layoutY="40" style="-fx-font-size: 28px; -fx-translate-y: -75;" text="⚠️" />
+    
+    <!-- Header Text -->
+    <Label fx:id="lblHeader" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1F2937;" text="Error" textAlignment="CENTER" />
+    
+    <!-- Message Text -->
+    <Label fx:id="lblMessage" alignment="CENTER" maxWidth="360" prefWidth="360" style="-fx-font-size: 14px; -fx-text-fill: #6B7280; -fx-line-spacing: 2;" text="An error occurred" textAlignment="CENTER" wrapText="true" />
+    
+    <!-- OK Button -->
+    <Button fx:id="btnOK" defaultButton="true" onAction="#handleOK" prefHeight="42" prefWidth="140" style="-fx-background-color: linear-gradient(to right, #EF4444, #DC2626); -fx-background-radius: 21; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="OK">
+        <effect>
+            <DropShadow color="#EF444440" offsetY="2" radius="8" spread="0.3" />
+        </effect>
+    </Button>
+    
+</VBox>

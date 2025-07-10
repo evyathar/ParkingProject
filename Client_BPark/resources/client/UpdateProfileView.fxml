@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateProfileController">
+
+    <VBox alignment="CENTER" prefHeight="595.0" prefWidth="640.0" spacing="25" style="-fx-background-color: linear-gradient(to bottom right, #F5F7FA, #E9ECEF); -fx-padding: 30;">
+        
+        <!-- Profile Update Card -->
+        <VBox maxHeight="-Infinity" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="580.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 40;">
+            <effect>
+                <DropShadow color="#0000001A" offsetY="5" radius="20" spread="0.1" />
+            </effect>
+            
+            <HBox alignment="CENTER" spacing="12">
+                <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to bottom right, #3B5CAD, #4A69BD); -fx-background-radius: 10; -fx-padding: 10;">
+                    <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text="⚙️" />
+                </HBox>
+                <Label style="-fx-text-fill: #2D3748; -fx-font-size: 24px; -fx-font-weight: bold;" text="Update Your Profile">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
+            <VBox.margin>
+               <Insets top="-30.0" />
+            </VBox.margin>
+            </HBox>
+            
+            <Separator style="-fx-background-color: linear-gradient(to right, transparent, #E2E8F0, transparent);" />
+            
+            <Label alignment="CENTER" style="-fx-text-fill: #718096; -fx-font-size: 14px;" text="Keep your information up to date for a better parking experience" />
+            
+            <!-- Form Fields -->
+            <VBox spacing="10.0">
+                <!-- Email Field -->
+                <VBox>
+                    <HBox spacing="8">
+                        <Label style="-fx-font-size: 16px;" text="📧" />
+                        <Label style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" text="Email Address" />
+                        <Label style="-fx-text-fill: #E53E3E; -fx-font-size: 14px;" text="*" />
+                    </HBox>
+                    <TextField fx:id="emailField" prefWidth="500" promptText="Enter your email address" style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;" />
+                </VBox>
+
+                <!-- Phone Field -->
+                <VBox spacing="8">
+                    <HBox spacing="8">
+                        <Label style="-fx-font-size: 16px;" text="📱" />
+                        <Label style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" text="Phone Number" />
+                        <Label style="-fx-text-fill: #E53E3E; -fx-font-size: 14px;" text="*" />
+                    </HBox>
+                    <TextField fx:id="phoneField" prefWidth="500" promptText="Enter your phone number" style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;" />
+                </VBox>
+
+                <!-- Car Number Field -->
+                <VBox spacing="8">
+                    <HBox spacing="8">
+                        <Label style="-fx-font-size: 16px;" text="🚗" />
+                        <Label style="-fx-text-fill: #4A5568; -fx-font-size: 14px; -fx-font-weight: bold;" text="Car Number" />
+                        <Label style="-fx-text-fill: #E53E3E; -fx-font-size: 14px;" text="*" />
+                    </HBox>
+                    <TextField fx:id="carNumberField" prefWidth="500" promptText="Enter your car number" style="-fx-background-color: #F7FAFC; -fx-background-radius: 10; -fx-border-color: #E2E8F0; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 10 15 10 15; -fx-font-size: 14px; -fx-text-fill: #2D3748;" />
+                </VBox>
+            </VBox>
+            
+            <!-- Update Button -->
+            <HBox alignment="CENTER">
+                <Button onAction="#handleUpdate" style="-fx-background-color: linear-gradient(to right, #4CAF50, #45A049); -fx-background-radius: 25; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 40 12 40; -fx-cursor: hand;" text="✅ Update Profile">
+                    <effect>
+                        <DropShadow color="#4CAF5040" offsetY="3" radius="12" spread="0.3" />
+                    </effect>
+                </Button>
+            </HBox>
+            
+            <!-- Status Label -->
+            <Label fx:id="statusLabel" alignment="CENTER" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="" />
+            
+            <!-- Info Box -->
+            <VBox spacing="8" style="-fx-background-color: #F0FDF4; -fx-background-radius: 12; -fx-padding: 15; -fx-border-color: #4CAF50; -fx-border-radius: 12; -fx-border-width: 1;">
+                <HBox spacing="8">
+                    <Label style="-fx-font-size: 14px;" text="ℹ" />
+                    <Label style="-fx-font-weight: bold; -fx-text-fill: #166534;" text="Important Notes" />
+               <VBox.margin>
+                  <Insets top="-10.0" />
+               </VBox.margin>
+                </HBox>
+                <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="• All fields marked with * are required" wrapText="true" />
+                <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="• Email address will be used for parking notifications" wrapText="true" />
+                <Label style="-fx-text-fill: #4A5568; -fx-font-size: 12px;" text="• Make sure your car number is accurate for parking validation" wrapText="true" />
+            </VBox>
+         <VBox.margin>
+            <Insets top="-20.0" />
+         </VBox.margin>
+        </VBox>
+
+    </VBox>
+</ScrollPane>
